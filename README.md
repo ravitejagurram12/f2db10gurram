@@ -1,7 +1,7 @@
 # f2wb10gurram
 created my second server
 
-[renderlink](https://f2wb10gurram.onrender.com)
+[renderlink](https://f2db10gurram.onrender.com)
 
 #### Class juice details :
 * juice
