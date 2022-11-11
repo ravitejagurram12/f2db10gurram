@@ -12,9 +12,18 @@ exports.juice_list = async function(req, res) {
     }   
 }; 
 // for a specific juice. 
-exports.juice_detail = function(req, res) { 
-    res.send('NOT IMPLEMENTED: juice detail: ' + req.params.id); 
+// for a specific Costume. 
+exports.juice_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await juice.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
 }; 
+
  
 // Handle juice create on POST. 
 exports.juice_create_post = async function(req, res) { 
@@ -43,8 +52,25 @@ exports.juice_delete = function(req, res) {
 }; 
  
 // Handle juice update form on PUT. 
-exports.juice_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: juice update PUT' + req.params.id); 
+
+exports.juice_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await juice.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.juice_flavour)  
+               toUpdate.juice_flavour = req.body.juice_flavour; 
+        if(req.body.juice_cost) toUpdate.juice_cost = req.body.juice_cost; 
+        if(req.body.juice_quantity) toUpdate.juice_quantity = req.body.juice_quantity; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
 }; 
 
 // VIEWS 
