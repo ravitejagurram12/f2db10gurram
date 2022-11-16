@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if (toShow == null) 
+    h3 No instance to update 
+  else
+   - let juiceid = toShow._id 
+   - let juice_type = toShow.juice_type 
+   - let juice_cost = toShow.juice_cost 
+   - let juice_quantity = toShow.juice_quantity 
+   - let actionid = "/resource/juice/" + juiceid 
+   div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{juiceid} 
+   
+   form(id='juiceForm', action= actionid, method="PUT") 
+     div.form-group 
+        label.juiceAttr(for='juice_flavour') juice flavour 
+        input#juice_type(type='text', name='juice_flavour', value= juice_flavour ) 
+     div.form-group 
+        label.juiceAttr(for='juice_cost') juice cost
+        input#size(type='number', name='juice_cost', value= juice_cost ) 
+     div.form-group 
+        label.juiceAttr(for='juice_quantity') juice quantity
+        input#cost(type='number', name='juice_quantity', value= juice_quantity ) 
+    input(type="submit") 
+ 
+   script. 
+    document.forms['juiceForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
