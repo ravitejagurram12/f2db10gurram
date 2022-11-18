@@ -4,13 +4,15 @@ block content
   h1= title
   - let result=results
   div(class="container-fluid")
-  div(class="row")
-   each value,index in result
-    div(class="col-sm-2" onclick=`buy(${index})`)  #{value.juice_flavour} drink, cost #{value.juice_cost}, quantity #{value.juice_quantity}
+  div(class="row m-1")
+   each value,index in results
+    -let destination=`buy(\"/juice/update?id=${value._id}\")`
+    div(class="row-sm-2",class="m-1")  #{value.juice_flavour} drink, cost #{value.juice_cost}, quantity #{value.juice_quantity}
+      button.btn( class="btn-primary ml-1", onclick=destination) Update
    script.
-    function buy(index)
+    function buy(path)
     {
-      alert(`Your purchased Item ${index+1}`)
+      window.location.href=path
     }
   
 

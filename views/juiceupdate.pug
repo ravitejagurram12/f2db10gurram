@@ -16,13 +16,13 @@ block content
    form(id='juiceForm', action=actionid, method="PUT")
     div.form-group
      label.juiceAttr(for='juice_flavour') juice flavour
-     input#juice_flavour(type='text', name='juice_flavour')
+     input#juice_flavour(type='text', name='juice_flavour' value=juice_flavour)
     div.form-group
      label.juiceAttr(for='juice_cost') juice cost
-     input#juice_cost(type='number', name='juice_cost')
+     input#juice_cost(type='number', name='juice_cost' value=juice_cost) 
     div.form-group
      label.juiceAttr(for='juice_quantity') juice quantity
-     input#juice_ing(type='number', name='juice_quantity')
+     input#juice_ing(type='number', name='juice_quantity' value=juice_quantity)
     input(type="submit")
    script.
     document.forms['juiceForm'].addEventListener('submit', (event) => {
