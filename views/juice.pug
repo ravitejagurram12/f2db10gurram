@@ -3,12 +3,18 @@ extends layout
 block content
   h1= title
   - let result=results
+  - let create= `buy(\"/juice/create\")`
+  button.btn( class="btn-primary ml-1", onclick=create) create juice
   div(class="container-fluid")
   div(class="row m-1")
    each value,index in results
     -let destination=`buy(\"/juice/update?id=${value._id}\")`
+    -let detai=`buy(\"/juice/detail?id=${value._id}\")`
+    -let del=`buy(\"/juice/delete?id=${value._id}\")`
     div(class="row-sm-2",class="m-1")  #{value.juice_flavour} drink, cost #{value.juice_cost}, quantity #{value.juice_quantity}
       button.btn( class="btn-primary ml-1", onclick=destination) Update
+      button.btn( class="btn-primary ml-1", onclick=detai) view
+      button.btn( class="btn-primary ml-1", onclick=del) delete
    script.
     function buy(path)
     {
