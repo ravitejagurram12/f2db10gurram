@@ -13,7 +13,7 @@ block content
     -let del=`buy(\"/juice/delete?id=${value._id}\")`
     div(class="row-sm-2",class="m-1")  #{value.juice_flavour} drink, cost #{value.juice_cost}, quantity #{value.juice_quantity}
       button.btn( class="btn-primary ml-1", onclick=destination) Update
-      button.btn( class="btn-primary ml-1", onclick=detai) view
+      button.btn( class="btn-primary ml-1", onclick=detai) detail
       button.btn( class="btn-primary ml-1", onclick=del) delete
    script.
     function buy(path)
